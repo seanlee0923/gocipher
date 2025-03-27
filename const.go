@@ -1,10 +1,10 @@
 package gocipher
 
 const (
-	BlockSizeDES      = 8
-	BlockSizeAES      = 16
-	BlockSize3DES     = 8
-	BlockSizeChaCha20 = 32
+	blockSizeDES      = 8
+	blockSizeAES      = 16
+	blockSize3DES     = 8
+	blockSizeChaCha20 = 32
 
 	AlgorithmDES      = "DES"
 	Algorithm3DES     = "3DES"

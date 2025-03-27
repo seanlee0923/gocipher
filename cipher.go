@@ -11,7 +11,7 @@ import (
 )
 
 func encryptDES(plaintext string, key []byte) (string, error) {
-	if len(key) != BlockSizeDES {
+	if len(key) != blockSizeDES {
 		return "", errors.New("invalid key size, must be 8 bytes for DES")
 	}
 	block, err := des.NewCipher(key)
@@ -19,18 +19,18 @@ func encryptDES(plaintext string, key []byte) (string, error) {
 		return "", err
 	}
 
-	paddedText := pad([]byte(plaintext), BlockSizeDES)
+	paddedText := pad([]byte(plaintext), blockSizeDES)
 	ciphertext := make([]byte, len(paddedText))
 
-	for i := 0; i < len(paddedText); i += BlockSizeDES {
-		block.Encrypt(ciphertext[i:i+BlockSizeDES], paddedText[i:i+BlockSizeDES])
+	for i := 0; i < len(paddedText); i += blockSizeDES {
+		block.Encrypt(ciphertext[i:i+blockSizeDES], paddedText[i:i+blockSizeDES])
 	}
 
 	return base64.StdEncoding.EncodeToString(ciphertext), nil
 }
 
 func decryptDES(encryptedBase64 string, key []byte) (string, error) {
-	if len(key) != BlockSizeDES {
+	if len(key) != blockSizeDES {
 		return "", errors.New("invalid key size, must be 8 bytes for DES")
 	}
 	ciphertext, err := base64.StdEncoding.DecodeString(encryptedBase64)
@@ -44,11 +44,11 @@ func decryptDES(encryptedBase64 string, key []byte) (string, error) {
 	}
 
 	plaintext := make([]byte, len(ciphertext))
-	for i := 0; i < len(ciphertext); i += BlockSizeDES {
-		block.Decrypt(plaintext[i:i+BlockSizeDES], ciphertext[i:i+BlockSizeDES])
+	for i := 0; i < len(ciphertext); i += blockSizeDES {
+		block.Decrypt(plaintext[i:i+blockSizeDES], ciphertext[i:i+blockSizeDES])
 	}
 
-	return string(unpad(plaintext)), nil
+	return unpad(plaintext)
 }
 
 func encryptAES_CBC(plaintext string, key []byte) (string, error) {
@@ -101,7 +101,7 @@ func decryptAES_CBC(encryptedBase64 string, key []byte) (string, error) {
 	plaintext := make([]byte, len(ciphertext))
 	mode.CryptBlocks(plaintext, ciphertext)
 
-	return string(unpad(plaintext)), nil
+	return unpad(plaintext)
 }
 
 func encryptAES_GCM(plaintext string, key []byte) (string, error) {
@@ -213,5 +213,5 @@ func decrypt3DES(encryptedBase64 string, key []byte) (string, error) {
 	plaintext := make([]byte, len(ciphertext))
 	mode.CryptBlocks(plaintext, ciphertext)
 
-	return string(unpad(plaintext)), nil
+	return unpad(plaintext)
 }

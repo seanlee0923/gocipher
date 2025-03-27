@@ -63,8 +63,14 @@ func pad(src []byte, blockSize int) []byte {
 	return append(src, padtext...)
 }
 
-func unpad(src []byte) []byte {
+func unpad(src []byte) (string, error) {
 	length := len(src)
+	if length == 0 {
+		return "", errors.New("invalid padding: empty data")
+	}
 	padding := int(src[length-1])
-	return src[:(length - padding)]
+	if padding > length || padding == 0 {
+		return "", errors.New("invalid padding")
+	}
+	return string(src[:(length - padding)]), nil
 }
