@@ -1,16 +1,18 @@
 package gocipher
 
-const (
-	AlgorithmDES      = "DES"
-	Algorithm3DES     = "3DES"
-	AlgorithmChaCha20 = "ChaCha20"
-	AlgorithmRSA      = "RSA"
+type Algorithm string
 
-	AESModeECB = "AES-ECB"
-	AESModeCBC = "AES-256-CBC"
-	AESModeCFB = "AES-256-CFB"
-	AESModeOFB = "AES-256-OFB"
-	AESModeGCM = "AES-256-GCM"
+const (
+	AlgorithmDES      Algorithm = "DES"
+	Algorithm3DES     Algorithm = "3DES"
+	AlgorithmChaCha20 Algorithm = "ChaCha20"
+	AlgorithmRSA      Algorithm = "RSA"
+
+	AESModeECB Algorithm = "AES-ECB"
+	AESModeCBC Algorithm = "AES-256-CBC"
+	AESModeCFB Algorithm = "AES-256-CFB"
+	AESModeOFB Algorithm = "AES-256-OFB"
+	AESModeGCM Algorithm = "AES-256-GCM"
 )
 
 const (

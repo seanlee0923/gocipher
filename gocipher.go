@@ -16,7 +16,7 @@ import (
 // Returns:
 // - A base64-encoded encrypted string.
 // - An error if the encryption fails or if the algorithm is unsupported.
-func Encrypt(algorithm string, plaintext string, key []byte) (string, error) {
+func Encrypt(algorithm Algorithm, plaintext string, key []byte) (string, error) {
 	switch algorithm {
 	case AlgorithmDES:
 		return encryptDES(plaintext, key)
@@ -42,7 +42,7 @@ func Encrypt(algorithm string, plaintext string, key []byte) (string, error) {
 // Returns:
 // - The original plaintext string if decryption is successful.
 // - An error if the decryption fails or if the algorithm is unsupported.
-func Decrypt(algorithm string, encryptedBase64 string, key []byte) (string, error) {
+func Decrypt(algorithm Algorithm, encryptedBase64 string, key []byte) (string, error) {
 	switch algorithm {
 	case AlgorithmDES:
 		return decryptDES(encryptedBase64, key)
