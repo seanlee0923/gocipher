@@ -17,6 +17,19 @@ so I implemented it in advance
 
 ## Install
 ```shell
-go get github.com/seanlee0923/gocipher
+go get -u github.com/seanlee0923/gocipher
 ```
 
+## Usage
+
+```golang
+encStr, err := gocipher.Encrypt(gocipher.AlgorithmDES, "String that you want to encrypt", []byte("12345678"))
+if err != nil {
+   // handle err
+}
+
+decStr, err := gocipher.Decrypt(gocipher.AlgorithmDES, encStr, []byte("12345678"))
+if err != nil {
+	// handle err
+}
+```
